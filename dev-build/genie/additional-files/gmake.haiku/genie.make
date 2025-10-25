@@ -62,7 +62,11 @@ ifeq ($(config),release)
   LIBDEPS            +=
   LDDEPS             +=
   LDRESP              =
+<<<<<<< HEAD
+  LIBS               += $(LDDEPS) -lm
+=======
   LIBS               += $(LDDEPS) -dll -lm
+>>>>>>> aaa84254f7473f590480add0ae1afe68923df813
   EXTERNAL_LIBS      +=
   LINKOBJS            = $(OBJECTS)
   LINKCMD             = $(CC) -o $(TARGET) $(LINKOBJS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
@@ -134,7 +138,11 @@ endif
 
 ifeq ($(config),debug)
   OBJDIR              = obj/Debug
+<<<<<<< HEAD
+  TARGETDIR           = ../../bin/haiku
+=======
   TARGETDIR           = ../../bin/linux
+>>>>>>> aaa84254f7473f590480add0ae1afe68923df813
   override TARGET              = $(TARGETDIR)/genie
   DEFINES            += -D_DEBUG -DLUA_COMPAT_MODULE -DLUA_USE_POSIX -DLUA_USE_DLOPEN -D_FILE_OFFSET_BITS=64
   INCLUDES           += -I"../../src/host/lua-5.3.0/src"
@@ -149,7 +157,11 @@ ifeq ($(config),debug)
   LIBDEPS            +=
   LDDEPS             +=
   LDRESP              =
+<<<<<<< HEAD
+  LIBS               += $(LDDEPS) -lm
+=======
   LIBS               += $(LDDEPS) -ldl -lm
+>>>>>>> aaa84254f7473f590480add0ae1afe68923df813
   EXTERNAL_LIBS      +=
   LINKOBJS            = $(OBJECTS)
   LINKCMD             = $(CC) -o $(TARGET) $(LINKOBJS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
