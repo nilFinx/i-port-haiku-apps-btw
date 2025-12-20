@@ -1,0 +1,112 @@
+]SUMMARY="Modern XMPP ("Jabber") Chat Client using GTK/Vala"
+DESCRIPTION="Dino is an XMPP messaging app for Linux using GTK and Vala. It supports calls, \
+	encryption, file transfers, group chats and more.
+	"
+HOMEPAGE="https://dino.im/"
+COPYRIGHT="2016 – 2025 Dino Team"
+LICENSE="GNU GPL v3"
+REVISION="1"
+SOURCE_URI="https://github.com/dino/dino/releases/download/v0.5.1/dino-$portVersion.tar.gz"
+CHECKSUM_SHA256="0b265ee3551dcddad5b62e188bdcab2cbb61a0d6a7e72107b2518a156b3ed665"
+SOURCE_FILENAME="dino-$portVersion.tar.gz"
+SOURCE_DIR="dino-$portVersion"
+
+ARCHITECTURES="all !x86_gcc2"
+SECONDARY_ARCHITECTURES="?x86"
+
+PROVIDES="
+	dino = $portVersion
+	cmd:dino = $portVersion
+	lib:libcrypto_vala = $portVersion
+	lib:libdino = $portVersion
+	lib:libqlite = $portVersion
+	lib:libxmpp_vala = $portVersion
+	"
+REQUIRES="
+	haiku
+	cmd:msgfmt
+	lib:libomemo_c
+	lib:libadwaita_1
+	lib:libcairo
+	lib:libgcrypt
+	lib:libgdk_pixbuf_2.0
+	lib:libgee_0.8
+	lib:libgio_2.0
+	lib:libglib_2.0
+	lib:libgobject_2.0
+	lib:libgraphene_1.0
+	lib:libgtk_4
+	lib:libpango_1.0
+	lib:libicuuc
+	lib:libintl
+	lib:libpango_1.0
+	lib:libsqlite3
+	lib:libsrtp2
+	"
+
+BUILD_REQUIRES="
+	haiku_devel
+	gst_plugins_good
+	cmd:msgfmt
+	lib:libglib_networking_2.0
+	devel:libadwaita_1
+	devel:libgdk_pixbuf_2.0
+	devel:libgee_0.8
+	devel:libgnutls
+	devel:libgpgme
+	devel:libgstreamer_1.0
+	devel:libgstapp_1.0
+	devel:libgstaudio_1.0
+	devel:libgstrtp_1.0
+	devel:libgstvideo_1.0
+	devel:libgtk_4
+	devel:libnice
+	devel:libomemo_c
+	devel:libqrencode
+	devel:libsoup_3.0
+	devel:libsrtp2
+	devel:libsqlite3
+
+	devel:libbrotlidec
+	devel:libnghttp2
+	devel:libpsl
+	devel:libz
+	" # the small part above is for libsoup, which does not declare its deps properly.
+BUILD_PREREQUIRES="
+	cmd:cmake
+	cmd:gcc
+	cmd:install
+	cmd:make
+	cmd:meson
+	cmd:pkg_config
+	cmd:valac
+	"
+
+TEST_REQUIRES="
+	cmd:meson
+	"
+
+BUILD()
+{
+	meson setup build \
+		--buildtype=release \
+		--prefix=$prefix \
+		--reconfigure \
+		-Dplugin-rtp-h264=enabled \
+		-Dplugin-rtp-vaapi=enabled \
+		-Dplugin-rtp-vp9=enabled \
+		-Dplugin-rtp-msdk=enabled \
+		-Dplugin-notification-sound=disabled # Not possible without libcanberra (missing port)
+	
+	meson compile -C build
+}
+
+INSTALL()
+{
+	meson install -C build
+}
+
+TEST()
+{
+	meson test -C build
+}
