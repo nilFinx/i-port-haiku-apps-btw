@@ -1,6 +1,23 @@
+Note: Create any new issues on the GitHub page. (on upsteam if this \
+	experimental Dino port got merged, on downstream \
+	(nilfinx/i-port-haiku-apps-btw/coming-the-2nd) if not)
+This is only for tracking issues before pushing, so I don't have to bomb the \
+	issue page
+
 Many icons are missing (buttons to be specific)
 Image rendering does not work
 Outgoing call being accepted crashes the app
 Accepting an incoming call never starts the call
-Find out a way to deal with the (disabled by default) notify sound plugin without libcanberra
+Find out a way to deal with the (disabled by default) notify sound plugin \
+	without libcanberra
 Add app:dino and remove cmd:dino
+Minimize/maximize button is absent
+Haiku's native window decoration is absent (by default - WindowTailor \
+	restores it back)
+Cannot resize (the app refuses to let me resize even with Ctrl+Alt)
+big ahh cursor that doesn't look like Haiku's
+The cursor type doesn't toggle (everything looks like I'm pointing, \
+	resource issue?)
+Popup lists? has a huge background (either libadwaita or GTK is responsible)
+No notifications (at least on my env, DBusNotifications throws the AT_SECURE \
+	error.)
