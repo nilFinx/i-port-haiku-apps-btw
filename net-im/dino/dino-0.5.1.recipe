@@ -1,4 +1,4 @@
-]SUMMARY="Modern XMPP ("Jabber") Chat Client using GTK/Vala"
+SUMMARY="Modern XMPP ("Jabber") Chat Client using GTK/Vala"
 DESCRIPTION="Dino is an XMPP messaging app for Linux using GTK and Vala. It supports calls, \
 	encryption, file transfers, group chats and more.
 	"
@@ -24,7 +24,6 @@ PROVIDES="
 	"
 REQUIRES="
 	haiku
-	cmd:msgfmt
 	lib:libomemo_c
 	lib:libadwaita_1
 	lib:libcairo
@@ -47,7 +46,6 @@ REQUIRES="
 BUILD_REQUIRES="
 	haiku_devel
 	gst_plugins_good
-	cmd:msgfmt
 	lib:libglib_networking_2.0
 	devel:libadwaita_1
 	devel:libgdk_pixbuf_2.0
@@ -75,9 +73,8 @@ BUILD_REQUIRES="
 BUILD_PREREQUIRES="
 	cmd:cmake
 	cmd:gcc
-	cmd:install
-	cmd:make
 	cmd:meson
+	cmd:msgfmt
 	cmd:pkg_config
 	cmd:valac
 	"
@@ -97,7 +94,7 @@ BUILD()
 		-Dplugin-rtp-vp9=enabled \
 		-Dplugin-rtp-msdk=enabled \
 		-Dplugin-notification-sound=disabled # Not possible without libcanberra (missing port)
-	
+
 	meson compile -C build
 }
 
