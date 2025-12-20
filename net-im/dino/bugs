@@ -1,0 +1,6 @@
+Many icons are missing (buttons to be specific)
+Image rendering does not work
+Outgoing call being accepted crashes the app
+Accepting an incoming call never starts the call
+Find out a way to deal with the (disabled by default) notify sound plugin without libcanberra
+Add app:dino and remove cmd:dino
