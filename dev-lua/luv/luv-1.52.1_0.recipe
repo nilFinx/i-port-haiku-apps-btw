@@ -7,7 +7,7 @@ REVISION="1"
 SOURCE_URI="https://github.com/luvit/luv/archive/refs/tags/${portVersion//_/-}.tar.gz"
 CHECKSUM_SHA256="e8b8774b31d24be4fcf2b021b90599ecccc8e476c61efcc59c3c10cab813a885"
 SOURCE_DIR="luv-${portVersion//_/-}"
-PATCHES="luv-$portVersion.patch"
+PATCHES="luv-$portVersion.patchset"
 
 ARCHITECTURES="all !x86_gcc2"
 if [ "$targetArchitecture" = x86_gcc2 ]; then
