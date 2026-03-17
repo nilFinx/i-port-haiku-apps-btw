@@ -5,11 +5,10 @@ HOMEPAGE="https://github.com/qTox/qTox"
 COPYRIGHT="2015-2021 qTox maintainers"
 LICENSE="GNU GPL v3"
 REVISION="1"
-SOURCE_URI="https://github.com/qTox/qTox/archive/v$portVersion.tar.gz"
-CHECKSUM_SHA256="cd0781241b4ea536da90ce8c72ad9f2aa9bbdf9fbae5d38ee645e30d790fa7f2"
-SOURCE_FILENAME="qtox-v$portVersion.tar.gz"
-SOURCE_DIR="qTox-$portVersion"
-PATCHES="qtox-$portVersion.patchset"
+SOURCE_URI="https://github.com/TokTok/qTox/releases/download/v$portVersion/v$portVersion.tar.xz"
+CHECKSUM_SHA256="0fe87ad88f01ae7cb1b8af6adb686e1be3ed69fe0372ea24b87a1ac30267b7ac"
+SOURCE_FILENAME="qtox-v$portVersion.tar.xz"
+SOURCE_DIR="qTox-v$portVersion"
 ADDITIONAL_FILES="qtox.rdef.in"
 
 ARCHITECTURES="all !x86_gcc2"
@@ -23,67 +22,37 @@ REQUIRES="
 	haiku$secondaryArchSuffix
 	lib:libavcodec$secondaryArchSuffix
 	lib:libavdevice$secondaryArchSuffix
-	lib:libavformat$secondaryArchSuffix
-	lib:libavutil$secondaryArchSuffix
 	lib:libexif$secondaryArchSuffix
-	lib:libglib_2.0$secondaryArchSuffix
-	lib:libintl$secondaryArchSuffix
-	lib:libKF5SonnetCore$secondaryArchSuffix
+	lib:libGL$secondaryArchSuffix
+	lib:libKF6SonnetCore$secondaryArchSuffix
 	lib:libopenal$secondaryArchSuffix
 	lib:libopus$secondaryArchSuffix
 	lib:libqrencode$secondaryArchSuffix
-	lib:libQt5Concurrent$secondaryArchSuffix
-	lib:libQt5Core$secondaryArchSuffix
-	lib:libQt5Gui$secondaryArchSuffix
-	lib:libQt5Network$secondaryArchSuffix
-	lib:libQt5OpenGL$secondaryArchSuffix
-	lib:libQt5Svg$secondaryArchSuffix
-	lib:libQt5Test$secondaryArchSuffix
-	lib:libQt5Widgets$secondaryArchSuffix
-	lib:libQt5Xml$secondaryArchSuffix
+	lib:libQt6Core$secondaryArchSuffix
+	lib:libQt6Svg$secondaryArchSuffix
 	lib:libsodium$secondaryArchSuffix
 	lib:libsqlcipher$secondaryArchSuffix
-	lib:libssp$secondaryArchSuffix
-	lib:libswscale$secondaryArchSuffix
 	lib:libtoxcore$secondaryArchSuffix
 	lib:libvpx$secondaryArchSuffix
-	lib:libX11$secondaryArchSuffix
 	"
 
 BUILD_REQUIRES="
 	haiku${secondaryArchSuffix}_devel
-	xlibe${secondaryArchSuffix}_devel
 	devel:libavcodec$secondaryArchSuffix
-	devel:libavdevice$secondaryArchSuffix
-	devel:libavformat$secondaryArchSuffix
-	devel:libavutil$secondaryArchSuffix
 	devel:libexif$secondaryArchSuffix
-	devel:libglib_2.0$secondaryArchSuffix
-	devel:libintl$secondaryArchSuffix
-	devel:libKF5SonnetCore$secondaryArchSuffix
+	devel:libGL$secondaryArchSuffix
+	devel:libKF6SonnetCore$secondaryArchSuffix
 	devel:libopenal$secondaryArchSuffix
-	devel:libopus$secondaryArchSuffix
 	devel:libqrencode$secondaryArchSuffix
-	devel:libQt5Concurrent$secondaryArchSuffix
-	devel:libQt5Core$secondaryArchSuffix
-	devel:libQt5Gui$secondaryArchSuffix
-	devel:libQt5Network$secondaryArchSuffix
-	devel:libQt5OpenGL$secondaryArchSuffix
-	devel:libQt5Svg$secondaryArchSuffix
-	devel:libQt5Test$secondaryArchSuffix
-	devel:libQt5Widgets$secondaryArchSuffix
-	devel:libQt5Xml$secondaryArchSuffix
-	devel:libsodium$secondaryArchSuffix
+	devel:libQt6Core$secondaryArchSuffix
+	devel:libQt6Svg$secondaryArchSuffix
 	devel:libsqlcipher$secondaryArchSuffix
-	devel:libssp$secondaryArchSuffix
-	devel:libswscale$secondaryArchSuffix
 	devel:libtoxcore$secondaryArchSuffix
-	devel:libvpx$secondaryArchSuffix
+	qt6_tools${secondaryArchSuffix}_devel
 	"
 BUILD_PREREQUIRES="
 	cmd:cmake
 	cmd:gcc$secondaryArchSuffix
-	cmd:lrelease$secondaryArchSuffix >= 5
 	cmd:make
 	cmd:pkg_config$secondaryArchSuffix
 	"
@@ -94,6 +63,9 @@ BUILD()
 	cmake -DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=$appsDir \
 		-DCMAKE_INSTALL_BINDIR=$appsDir \
+		-DGIT_DESCRIBE:STRING=${portVersion}_$REVISION \
+		-DGIT_DESCRIBE_EXACT=RELEASE \
+		-DUPDATE_CHECK=OFF \
 		-DCMAKE_EXE_LINKER_FLAGS=-lnetwork -Wno-dev ..
 	make $jobArgs
 }
