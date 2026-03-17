@@ -1,3 +1,9 @@
+From b834c9fe429dbcbb811385f99385d06235b6dd7c Mon Sep 17 00:00:00 2001
+From: nilFinx <nulflox@disroot.org>
+Date: Tue, 17 Mar 2026 16:46:31 +0900
+Subject: Fix test
+
+
 diff --git a/Makefile b/Makefile
 index 70679fe..ed51b01 100644
 --- a/Makefile
@@ -13,3 +19,6 @@ index 70679fe..ed51b01 100644
  	$(MAKE) -C $(BUILD_DIR) test
  	$(BUILD_DIR)/test tests/manual-test-external-loop.lua
  
+-- 
+2.52.0
+
